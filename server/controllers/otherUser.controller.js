@@ -1,5 +1,5 @@
-const express = require('express');
 let OtherUserSchema = require('../models/otherUser.model');
+var EmailController = require('../controllers/email.controller');
 
 var otherUserController = function () {
     /**
@@ -20,6 +20,11 @@ var otherUserController = function () {
 
 
             otherUser.save().then(() => {
+
+                let userRole = data.role;
+                if(userRole.equals("INSTRUCTOR")){
+                    EmailController.sendMail(otherUser);
+                }
                 resolve({
                     status: 200,
                     message: 'Added a other user successfully'
@@ -125,7 +130,6 @@ var otherUserController = function () {
         var name = JSON.stringify(data.name);
         var userName = JSON.stringify(data.userName);
         var password = JSON.stringify(data.password);
-        var email = JSON.stringify(data.email);
         var role = JSON.stringify(data.role);
         var JoinedDate = JSON.stringify(data.JoinedDate);
         var qualifications = JSON.stringify(data.qualifications);
