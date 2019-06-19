@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import properties from '../config/propertydb';
 
 const NotificationSchema = new mongoose.Schema(
     {
@@ -27,4 +26,4 @@ const NotificationSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Notification',NotificationSchema,properties.database);
+module.exports = mongoose.model('Notification',NotificationSchema);

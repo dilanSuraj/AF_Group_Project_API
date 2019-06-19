@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import properties from '../config/propertydb';
-
 const StudentSchema = new mongoose.Schema(
     {
         name: {
@@ -41,4 +39,4 @@ const StudentSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Student',StudentSchema,properties.database);
+module.exports = mongoose.model('Student',StudentSchema);

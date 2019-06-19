@@ -18,8 +18,9 @@ const studentRouteHandler = require('../routes/student.routes');
 const studentExamRouteHandler = require('../routes/student.exam.routes');
 
 //connect to mongodb database to a default URL or for a new URL if it is not working
-mongoose.connect( 'mongodb://'+properties.host+':'+properties.mongoPort+'/'+properties.database, {useNewUrlParser: true});
+// mongoose.connect( 'mongodb://'+properties.host+':'+properties.mongoPort+'/'+properties.database, {useNewUrlParser: true});
 
+mongoose.connect(properties.url);
 //Get the mongodb connection
 const connection = mongoose.connection;
 

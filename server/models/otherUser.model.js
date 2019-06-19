@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import properties from '../config/propertydb';
+
 
 const OtherUserSchema = new mongoose.Schema(
     {
@@ -38,4 +38,4 @@ const OtherUserSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('OtherUser',OtherUserSchema,properties.database);
+module.exports = mongoose.model('OtherUser',OtherUserSchema);

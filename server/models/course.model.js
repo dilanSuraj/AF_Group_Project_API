@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const properties = require('../config/propertydb');
 
 const CourseSchema = new mongoose.Schema(
     {
@@ -20,4 +19,4 @@ const CourseSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Course',CourseSchema,properties.database);
+module.exports = mongoose.model('Course',CourseSchema);
