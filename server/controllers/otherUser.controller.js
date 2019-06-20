@@ -22,7 +22,7 @@ var otherUserController = function () {
             otherUser.save().then(() => {
 
                 let userRole = data.role;
-                if(userRole.equals("INSTRUCTOR")){
+                if(userRole === ("INSTRUCTOR")){
                     EmailController.sendMail(otherUser);
                 }
                 resolve({

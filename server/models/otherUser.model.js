@@ -25,8 +25,7 @@ const OtherUserSchema = new mongoose.Schema(
             required: 'Email is required'
         },
         role: {
-          type: String,
-          enum: ['ADMIN','INSTRUCTOR']
+          type: String
         },
         JoinedDate: {
             type: Date,

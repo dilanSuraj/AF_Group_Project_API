@@ -11,10 +11,10 @@ router.route('/').post(function (req, res) {
         res.status(data.status).send({
             message: data.message
         });
-    }).catch(error => {
+    }).catch(function (error) {
         res.status(error.status).send({
             message: error.message
-        })
+        });
     })
 });
 
