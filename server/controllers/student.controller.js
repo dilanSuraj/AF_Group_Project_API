@@ -40,7 +40,7 @@ var studentController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            StudentSchema.find().sort({random: 1}).limit(1).exec().then((data) => {
+            StudentSchema.find().exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data

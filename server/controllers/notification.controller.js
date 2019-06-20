@@ -36,7 +36,7 @@ var notificationController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            NotificationSchema.find().sort({random: 1}).limit(1).exec().then((data) => {
+            NotificationSchema.find().exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data

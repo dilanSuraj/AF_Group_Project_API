@@ -36,7 +36,7 @@ var studentExamController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            StudentExamSchema.find().sort({random: 1}).limit(1).exec().then((data) => {
+            StudentExamSchema.find().then((data) => {
                 resolve({
                     status: 200,
                     data: data

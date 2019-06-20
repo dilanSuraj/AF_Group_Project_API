@@ -45,7 +45,7 @@ var otherUserController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            OtherUserSchema.find().sort({random: 1}).limit(1).exec().then((data) => {
+            OtherUserSchema.find().exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data

@@ -39,7 +39,7 @@ var assignmentExamController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            AssignmentExamSchema.find().sort({random: 1}).limit(1).exec().then((data) => {
+            AssignmentExamSchema.find().exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data
