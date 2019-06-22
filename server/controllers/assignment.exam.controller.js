@@ -38,7 +38,7 @@ var assignmentExamController = function () {
                     description: "New Exam "+data.name+" has created",
                     course: addedExam.courseCode,
                     studentreceiverlist:studentList,
-                    superuserreceiverlist:null
+                    superuserreceiverlist:null,
                     role:"STUDENT"
 
                 };
