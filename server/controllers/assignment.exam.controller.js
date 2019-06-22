@@ -1,5 +1,9 @@
 const express = require('express');
 let AssignmentExamSchema = require('../models/assignment.exam.model');
+const notificationController = require('../controllers/notification.controller');
+const studentController = require('../controllers/student.controller');
+
+
 
 var assignmentExamController = function () {
     /**
@@ -18,11 +22,39 @@ var assignmentExamController = function () {
 
 
 
-            assignmentExam.save().then(() => {
-                resolve({
-                    status: 200,
-                    message: 'Added a assignmentExam successfully'
-                })
+            assignmentExam.save().then((addedExam) => {
+
+                let studentList = [];
+                studentController.getByCourse(addedExam.courseCode).then((students) =>{
+                    studentList = students.data;
+                    console.log("Students  "+studentList);
+                }).catch((err)=>[
+                    console.log("Error "+err)
+                ]);
+
+
+                let notification = {
+
+                    description: "New Exam "+data.name+" has created",
+                    course: addedExam.courseCode,
+                    studentreceiverlist:studentList,
+                    superuserreceiverlist:null
+                    role:"STUDENT"
+
+                };
+                notificationController.insert(notification).then((data) =>{
+                        resolve({
+                            status: 200,
+                            message: 'Sent a notification and added an exam successfully'+ data
+                        })
+                    }
+
+                ).catch((err) =>{
+                    reject({
+                        status: 500,
+                        message: 'Error : ' + err
+                    })
+                });
             }).catch((err) => {
                 reject({
                     status: 500,

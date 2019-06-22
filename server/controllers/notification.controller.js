@@ -9,8 +9,10 @@ var notificationController = function () {
         return new Promise(function (resolve, reject) {
             var notification = new NotificationSchema({
                 description : data.description,
-                notificationCode: data.notificationCode,
-                receiverList: data.receiverList
+                course:data.course,
+                studentreceiverlist: data.studentreceiverlist,
+                superuserreceiverlist: data.superuserreceiverlist,
+                role:data.role
             });
 
 
@@ -53,11 +55,12 @@ var notificationController = function () {
      * getOne method to retrieve data of specified notification based on the notification code
      */
 
-    this.getOne = (notificationCode) => {
+    this.getOne = (receiver,role) => {
         return new Promise(function (resolve, reject) {
-            NotificationSchema.find({
-                notificationCode: notificationCode
-            }).exec().then((data) => {
+            NotificationSchema.find({$and:[{
+                    receiver: receiver,
+                    role: role
+                }]}).exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data
@@ -70,66 +73,6 @@ var notificationController = function () {
             })
         })
     };
-
-    /**
-     * Delete an existing notification
-     */
-    this.deleteOne = (id) => {
-        return new Promise(function (resolve, reject) {
-            NotificationSchema.remove({
-                _id: id
-            }).exec().then((data) => {
-                resolve({
-                    status: 200,
-                    message: 'Deleted'
-                })
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
-            })
-        })
-    };
-    /**
-     * Notification  update
-     */
-
-    this.update = (notificationCode,data) => {
-        var description = JSON.stringify(data.description);
-        var notificationCode = JSON.stringify(data.notificationCode);
-        var receiverList = JSON.stringify(data.receiverList);
-
-
-        return new Promise(function (resolve, reject) {
-            NotificationSchema.find({
-                notificationCode: notificationCode
-            }).exec().then((notification) => {
-
-                if(!notification){
-
-                    notification.notificationCode = notificationCode;
-                    notification.description = description;
-                    notification.receiverList = receiverList;
-
-                    notification.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
-            })
-        })
-    }
 
 };
 /**

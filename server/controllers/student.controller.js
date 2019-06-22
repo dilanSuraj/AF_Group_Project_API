@@ -73,6 +73,37 @@ var studentController = function () {
         })
     };
 
+    this.getByCourse = (courseId) => {
+        return new Promise(function (resolve, reject) {
+            StudentSchema.find().exec().then((allStudents) => {
+
+                let StudentsObjectsList = [];
+
+                for (let student of allStudents){
+
+                    for(let course of student.courses){
+
+                         if(course === courseId){
+                             StudentsObjectsList.push(student._id);
+                         }
+
+                    }
+
+                }
+
+                resolve({
+                    status: 200,
+                    data: StudentsObjectsList
+                })
+            }).catch((err) => {
+                reject({
+                    status: 500,
+                    message: 'Error : ' + err
+                })
+            })
+        })
+    };
+
     /**
      * getOne method to retrieve data of specified Student based on the email and password
      */

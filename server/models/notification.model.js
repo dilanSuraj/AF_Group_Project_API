@@ -7,21 +7,20 @@ const NotificationSchema = new mongoose.Schema(
             trim: true,
             required: 'Notification description field cannot be empty'
         },
-        notificationCode: {
-            type: String,
-            trim: true,
-            required: 'Notification code field cannot be empty'
+        course :{
+            type: mongoose.Schema.ObjectId,
+            ref: 'Course'
         },
-        receiverList: {
-            studentList:[{
-                          type: mongoose.Schema.ObjectId,
-                          ref: 'Student'
-                        }],
-            OtherUserList:[{
-                type: mongoose.Schema.ObjectId,
-                ref: 'OtherUser'
-            }]
-
+        studentreceiverlist:[{
+            type: mongoose.Schema.ObjectId,
+            ref: 'Student'
+        }],
+        superuserreceiverlist:[{
+            type: mongoose.Schema.ObjectId,
+            ref: 'OtherUser'
+        }],
+        role:{
+            type: String
         }
     }
 );

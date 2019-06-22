@@ -1,4 +1,5 @@
 const courseController = require('../controllers/course.controller');
+
 const express = require('express');
 var router = express.Router();
 
@@ -11,6 +12,7 @@ router.route('/').post(function (req, res) {
         res.status(data.status).send({
             message: data.message
         });
+
     }).catch(error => {
         res.status(error.status).send({
             message: error.message

@@ -1,5 +1,6 @@
 const express = require('express');
 let CourseSchema = require('../models/course.model');
+const notificationController = require('../controllers/notification.controller');
 
 var courseController = function () {
     /**
@@ -15,11 +16,32 @@ var courseController = function () {
 
 
 
-            course.save().then(() => {
-                resolve({
-                    status: 200,
-                    message: 'Added a course successfully'
-                })
+            course.save().then((addedCourse) => {
+
+                let notification = {
+
+                    description: "New Course "+data.name+" has created",
+                    course: addedCourse._id,
+                    studentreceiverlist:null,
+                    superuserreceiverlist:null,
+                    role:"INSTRUCTOR"
+
+                };
+                notificationController.insert(notification).then((data) =>{
+                    resolve({
+                        status: 200,
+                        message: 'Sent a notification and added course successfully'+ data
+                    })
+                    }
+
+                ).catch((err) =>{
+                    reject({
+                        status: 500,
+                        message: 'Error : ' + err
+                    })
+                });
+
+
             }).catch((err) => {
                 reject({
                     status: 500,
