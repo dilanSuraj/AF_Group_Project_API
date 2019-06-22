@@ -8,11 +8,6 @@ const OtherUserSchema = new mongoose.Schema(
             trim: true,
             required: 'Name field cannot be empty'
         },
-        userName: {
-            type: String,
-            trim: true,
-            required: 'Username field cannot be empty'
-        },
         password: {
             type: String,
             required: 'Password field cannot be empty'

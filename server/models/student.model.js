@@ -6,10 +6,10 @@ const StudentSchema = new mongoose.Schema(
             trim: true,
             required: 'Name field cannot be empty'
         },
-        userName: {
+        regNumber: {
             type: String,
             trim: true,
-            required: 'Username field cannot be empty'
+            required: 'Registration Number field cannot be empty'
         },
         password: {
             type: String,
@@ -32,10 +32,10 @@ const StudentSchema = new mongoose.Schema(
                 gpaValue: Number
             }
         ],
-        courses:{
+        courses:[{
             type: mongoose.Schema.ObjectId,
             ref: 'Course'
-        }
+        }]
     }
 );
 

@@ -49,6 +49,25 @@ var courseController = function () {
             })
         })
     };
+
+    this.getAcceptedCourses = () => {
+        return new Promise(function (resolve, reject) {
+            CourseSchema.find({
+                isCourseAccepted: true
+            }).exec().then((data) => {
+                resolve({
+                    status: 200,
+                    data: data
+                })
+            }).catch((err) => {
+                reject({
+                    status: 500,
+                    message: 'Error : ' + err
+                })
+            })
+        })
+    };
+
     /**
      * getOne method to retrieve data of specified course based on the course code
      */

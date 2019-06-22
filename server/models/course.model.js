@@ -14,7 +14,11 @@ const CourseSchema = new mongoose.Schema(
         courseInstructor:{
             type: mongoose.Schema.ObjectId,
             ref: 'OtherUser'
+        },
+        isCourseAccepted:{
+            type: Boolean
         }
+
 
     }
 );

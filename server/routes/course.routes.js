@@ -29,6 +29,17 @@ router.route('/').get(function (req, res) {
     })
 });
 
+router.route('/accepted').get(function (req, res) {
+    courseController.getAcceptedCourses().then(function (data) {
+        res.status(data.status).send(data.data
+        );
+    }).catch(error => {
+        res.status(error.status).send({
+            message: error.message
+        })
+    })
+});
+
 router.route('/:courseId').get(function (req, res) {
     courseController.getOne(req.params.courseId).then(function (data) {
         res.status(data.status).send(
@@ -54,6 +65,8 @@ router.route('/:id').delete(function (req, res) {
         })
     })
 });
+
+
 
 router.route('/:courseId').put(function (req, res) {
     courseController.update(req.params.courseId, req.body).then(function (data) {

@@ -9,15 +9,13 @@ var studentController = function () {
         return new Promise(function (resolve, reject) {
             var student = new StudentSchema({
                 name : data.name,
-                userName: data.userName,
+                regNumber: data.regNumber,
                 password: data.password,
                 email:data.email,
                 admissionYear:data.admissionYear,
                 gpa: data.gpa,
                 courses:data.courses
             });
-
-
 
             student.save().then(() => {
                 resolve({
@@ -96,7 +94,7 @@ var studentController = function () {
                 })
             })
         })
-    }
+    };
 
     /**
      * Delete an existing student
@@ -124,7 +122,7 @@ var studentController = function () {
 
     this.update = (email,data) => {
         var name = JSON.stringify(data.name);
-        var userName = JSON.stringify(data.userName);
+        var regNumber = JSON.stringify(data.regNumber);
         var password = JSON.stringify(data.password);
         var email = JSON.stringify(data.email);
         var gpa = JSON.stringify(data.gpa);
@@ -141,7 +139,7 @@ var studentController = function () {
                 if(!student){
 
                     student.name = name;
-                    student.userName = userName;
+                    student.regNumber = regNumber;
                     student.password = password;
                     student.email = email;
                     student.gpa = gpa;

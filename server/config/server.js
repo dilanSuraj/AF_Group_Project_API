@@ -4,8 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const PORT = 4000;
-const properties = require('./propertydb');
-const componentRoutes = express.Router();
+
 //Middleware by calling 'use'
 app.use(cors());
 app.use(bodyParser.json());
@@ -17,8 +16,6 @@ const otherUserRouteHandler = require('../routes/otherUser.routes');
 const studentRouteHandler = require('../routes/student.routes');
 const studentExamRouteHandler = require('../routes/student.exam.routes');
 
-//connect to mongodb database to a default URL or for a new URL if it is not working
-// mongoose.connect( 'mongodb://'+properties.host+':'+properties.mongoPort+'/'+properties.database, {useNewUrlParser: true});
 
 mongoose.connect('mongodb+srv://estudentinfoapp:estudentinfoapp@unidb-af1bs.mongodb.net/test?retryWrites=true&w=majority');
 

@@ -21,10 +21,7 @@ const AssignmentExamSchema = new mongoose.Schema(
             enum: ['CA','FINAL']
         },
         marks: {
-             type: Number,
-             fullMarks:{
-                type:  Number
-             }
+             type: Number
         },
         deadlineDate: {
             type: Date,

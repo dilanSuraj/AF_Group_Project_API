@@ -9,7 +9,6 @@ var otherUserController = function () {
         return new Promise(function (resolve, reject) {
             var otherUser = new OtherUserSchema({
                 name : data.name,
-                userName: data.userName,
                 password: data.password,
                 email:data.email,
                 role:data.role,
@@ -128,7 +127,6 @@ var otherUserController = function () {
 
     this.update = (email,data) => {
         var name = JSON.stringify(data.name);
-        var userName = JSON.stringify(data.userName);
         var password = JSON.stringify(data.password);
         var role = JSON.stringify(data.role);
         var JoinedDate = JSON.stringify(data.JoinedDate);
@@ -144,7 +142,6 @@ var otherUserController = function () {
                 if(!otherUser){
 
                     otherUser.name = name;
-                    otherUser.userName = userName;
                     otherUser.password = password;
                     otherUser.email = email;
                     otherUser.role = role;
