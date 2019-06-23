@@ -58,7 +58,7 @@ var courseController = function () {
 
     this.get = () => {
         return new Promise(function (resolve, reject) {
-            CourseSchema.find().exec().then((data) => {
+            CourseSchema.find().populate('courseInstructor').exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data
@@ -76,7 +76,7 @@ var courseController = function () {
         return new Promise(function (resolve, reject) {
             CourseSchema.find({
                 isCourseAccepted: true
-            }).exec().then((data) => {
+            }).populate('courseInstructor').exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data
@@ -98,7 +98,25 @@ var courseController = function () {
         return new Promise(function (resolve, reject) {
             CourseSchema.find({
                     courseId: courseId
-                }).exec().then((data) => {
+                }).populate('courseInstructor').exec().then((data) => {
+                resolve({
+                    status: 200,
+                    data: data
+                })
+            }).catch((err) => {
+                reject({
+                    status: 500,
+                    message: 'Error : ' + err
+                })
+            })
+        })
+    };
+
+    this.getCoursesByInstructor = (instructorId) => {
+        return new Promise(function (resolve, reject) {
+            CourseSchema.find({
+                courseInstructor: instructorId
+            }).populate('courseInstructor').exec().then((data) => {
                 resolve({
                     status: 200,
                     data: data

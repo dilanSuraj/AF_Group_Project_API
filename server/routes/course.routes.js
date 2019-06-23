@@ -54,6 +54,18 @@ router.route('/:courseId').get(function (req, res) {
     })
 });
 
+router.route('/instructor/:instructorId').get(function (req, res) {
+    courseController.getCoursesByInstructor(req.params.instructorId).then(function (data) {
+        res.status(data.status).send(
+            data.data
+        );
+    }).catch(error => {
+        res.status(error.status).send({
+            message: error.message
+        })
+    })
+});
+
 router.route('/:id').delete(function (req, res) {
     courseController.deleteOne(req.params.id).then(function (data) {
         res.status(data.status).send(
