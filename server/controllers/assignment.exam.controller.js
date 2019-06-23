@@ -130,44 +130,12 @@ var assignmentExamController = function () {
      * User can update their profile
      */
 
-    this.update = (assignmentExamCode,data) => {
-        var description = JSON.stringify(data.description);
-        var assignmentExamCode = JSON.stringify(data.assignmentExamCode);
-        var courseCode = JSON.stringify(data.courseCode);
-        var typeOfExam = JSON.stringify(data.typeOfExam);
-        var marks = JSON.stringify(data.marks);
-        var deadlineDate = JSON.stringify(data.deadlineDate);
-
-
-        return new Promise(function (resolve, reject) {
-            AssignmentExamSchema.find({
-                assignmentExamCode: assignmentExamCode
-            }).exec().then((assignmentExam) => {
-
-                if(!assignmentExam){
-
-                    assignmentExam.assignmentExamCode = assignmentExamCode;
-                    assignmentExam.description = description;
-                    assignmentExam.courseCode = courseCode;
-                    assignmentExam.typeOfExam = typeOfExam;
-                    assignmentExam.marks = marks;
-                    assignmentExam.deadlineDate = deadlineDate;
-
-                    assignmentExam.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
+    this.update = (assignmentExamCode, data) => {
+        return new Promise((resolve, reject) => {
+            AssignmentExamSchema.update({assignmentExamCode: assignmentExamCode}, data).then(() => {
+                resolve({status: 200, message: "updated the Assignment"});
+            }).catch(err => {
+                reject({status: 500, message: "Error:- " + err});
             })
         })
     }
