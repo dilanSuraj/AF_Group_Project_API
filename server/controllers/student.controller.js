@@ -151,50 +151,15 @@ var studentController = function () {
      * User can update their profile
      */
 
-    this.update = (email,data) => {
-        var name = JSON.stringify(data.name);
-        var regNumber = JSON.stringify(data.regNumber);
-        var password = JSON.stringify(data.password);
-        var email = JSON.stringify(data.email);
-        var gpa = JSON.stringify(data.gpa);
-        var courses = JSON.stringify(data.courses);
-        var admissionYear = JSON.stringify(data.admissionYear);
-
-
-
-        return new Promise(function (resolve, reject) {
-            StudentSchema.find({
-                email: email
-            }).exec().then((student) => {
-
-                if(!student){
-
-                    student.name = name;
-                    student.regNumber = regNumber;
-                    student.password = password;
-                    student.email = email;
-                    student.gpa = gpa;
-                    student.courses = courses;
-                    student.admissionYear = admissionYear;
-
-                    student.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
+    this.update = (email, data) => {
+        return new Promise((resolve, reject) => {
+            StudentSchema.update({email: email}, data).then(() => {
+                resolve({status: 200, message: "updated Other User"});
+            }).catch(err => {
+                reject({status: 500, message: "Error:- " + err});
             })
         })
-    }
+    };
 
 };
 /**

@@ -125,47 +125,16 @@ var otherUserController = function () {
      * User can update their profile
      */
 
-    this.update = (email,data) => {
-        var name = JSON.stringify(data.name);
-        var password = JSON.stringify(data.password);
-        var role = JSON.stringify(data.role);
-        var JoinedDate = JSON.stringify(data.JoinedDate);
-        var qualifications = JSON.stringify(data.qualifications);
-
-
-
-        return new Promise(function (resolve, reject) {
-            OtherUserSchema.find({
-                email: email
-            }).exec().then((otherUser) => {
-
-                if(!otherUser){
-
-                    otherUser.name = name;
-                    otherUser.password = password;
-                    otherUser.email = email;
-                    otherUser.role = role;
-                    otherUser.JoinedDate = JoinedDate;
-                    otherUser.qualifications = qualifications;
-
-                    otherUser.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
+    this.update = (email, data) => {
+        return new Promise((resolve, reject) => {
+            OtherUserSchema.update({email: email}, data).then(() => {
+                resolve({status: 200, message: "updated Other User"});
+            }).catch(err => {
+                reject({status: 500, message: "Error:- " + err});
             })
         })
-    }
+    };
+
 
 };
 /**

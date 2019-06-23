@@ -136,41 +136,17 @@ var courseController = function () {
      * User can update their profile
      */
 
-    this.update = (courseId,data) => {
-        var courseId = JSON.stringify(data.courseId);
-        var name = JSON.stringify(data.name);
-        var courseInstructor = JSON.stringify(data.courseInstructor);
-
-
-        return new Promise(function (resolve, reject) {
-            CourseSchema.find({
-                courseId: courseId
-            }).exec().then((course) => {
-
-                if(!course){
-
-                    course.name = courseId;
-                    course.courseId = name;
-                    course.courseInstructor = courseInstructor;
-
-                    course.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
+    this.update = (courseId, data) => {
+        return new Promise((resolve, reject) => {
+            CourseSchema.update({_id: courseId}, data).then(() => {
+                resolve({status: 200, message: "updated the course"});
+            }).catch(err => {
+                reject({status: 500, message: "Error:- " + err});
             })
         })
-    }
+    };
+
+
 
 };
 /**

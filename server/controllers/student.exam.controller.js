@@ -95,41 +95,17 @@ var studentExamController = function () {
      * User can update their profile
      */
 
-    this.update = (examId,data) => {
-        var examId = JSON.stringify(data.examId);
-        var studentId = JSON.stringify(data.studentId);
-        var marks = JSON.stringify(data.marks);
 
-
-        return new Promise(function (resolve, reject) {
-            StudentExamSchema.find({
-                examId: examId
-            }).exec().then((studentExam) => {
-
-                if(!studentExam){
-
-                    studentExam.assignmentExamCode = examId;
-                    studentExam.description = studentId;
-                    studentExam.marks = marks;
-
-                    studentExam.save().then( (data) => resolve({
-                        status: 200,
-                        data: data
-                    })).catch((err) => reject({
-                        status: 500,
-                        message: 'Error : ' + err
-                    }));
-
-                }
-
-            }).catch((err) => {
-                reject({
-                    status: 500,
-                    message: 'Error : ' + err
-                })
+    this.update = (examId, data) => {
+        return new Promise((resolve, reject) => {
+            StudentExamSchema.update({_id: examId}, data).then(() => {
+                resolve({status: 200, message: "updated Student Exam"});
+            }).catch(err => {
+                reject({status: 500, message: "Error:- " + err});
             })
         })
-    }
+    };
+
 
 };
 /**

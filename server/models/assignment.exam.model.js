@@ -24,8 +24,7 @@ const AssignmentExamSchema = new mongoose.Schema(
              type: Number
         },
         deadlineDate: {
-            type: Date,
-            default: Date.now
+            type: String
         }
     }
 );
